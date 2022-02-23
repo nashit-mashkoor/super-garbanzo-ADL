@@ -1,0 +1,13 @@
+# Pt2 Dockerfile adds the python files and model
+mv Dockerfile Dockerfile_base
+mv Dockerfile_pt2 Dockerfile
+
+sudo docker build -t sd .
+sudo docker tag sd:latest smartpetdocker/smart_pet:sd
+sudo docker push smartpetdocker/smart_pet:sd
+
+# Pull docker image
+sudo docker pull smartpetdocker/smart_pet:sd
+
+# Run docker container
+sudo docker run --net=host --runtime=nvidia -v /usr/lib/python3.6/dist-packages/tensorrt:/usr/lib/python3.6/dist-packages/tensorrt smartpetdocker/smart_pet:sd
